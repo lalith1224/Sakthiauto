@@ -279,4 +279,16 @@ router.get('/api/qc/fbq03/latest/:component', async (req, res) => {
   }
 });
 
+// Get all master data
+router.get('/api/master-data', async (req, res) => {
+  try {
+    const query = 'SELECT * FROM master_data';
+    const result = await pool.query(query);
+    res.json(result.rows);
+  } catch (err) {
+    console.error('Error fetching master data:', err.message);
+    res.status(500).json({ error: 'Server error', details: err.message });
+  }
+});
+
 module.exports = router;

@@ -1,5 +1,5 @@
 const dotenv = require('dotenv');
-dotenv.config({ path: '../.env' });
+dotenv.config({ path: '.env' });
 
 const express = require('express');
 const app = express();
@@ -16,11 +16,14 @@ app.use((req, res, next) => {
   next();
 });
 
-// ✅ Load QF07_FBQ routes AFTER middleware
+// ✅ Load routes
 const QF07Router = require('./QF07_FBQ_02');
 const QF07FBQ03Router = require('./QF07_FBQ_03');
+const timeStudyRouter = require('./timeStudyRoutes'); // Add time study routes
+
 app.use('/', QF07Router);
 app.use('/', QF07FBQ03Router);
+app.use('/', timeStudyRouter); // Register time study routes
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

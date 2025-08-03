@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Study Process</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        
+        .form-section {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #444;
+        }
+        
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        
+        .required label::after {
+            content: " *";
+            color: red;
+        }
+        
+        button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #0056b3;
+        }
+        
+        .response-message {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+            display: none;
+        }
+        
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .nav-button {
+            display: inline-block;
+            padding: 8px 15px;
+            background-color: #6c757d;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        
+        .nav-button:hover {
+            background-color: #5a6268;
+        }
+        
+        .form-group.hidden {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .form-section {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="nav-button">Back to Main Menu</a>
+        <h1>Time Study Process Form</h1>
+        
+        <form id="timeStudyForm">
+            <!-- Basic Information Section -->
+            <div class="form-section">
+                <div class="form-group required">
+                    <label for="shift">Shift</label>
+                    <select id="shift" required>
+                        <option value="">Select shift</option>
+                        <option value="A">Shift A</option>
+                        <option value="B">Shift B</option>
+                        <option value="C">Shift C</option>
+                    </select>
+                </div>
+                
+                <div class="form-group required">
+                    <label for="part_name">Part Name</label>
+                    <input type="text" id="part_name" required>
+                </div>
+                
+                <div class="form-group required">
+                    <label for="heat_code">Heat Code</label>
+                    <input type="text" id="heat_code" required>
+                </div>
+                
+                <div class="form-group required">
+                    <label for="grade">Grade</label>
+                    <input type="text" id="grade" required>
+                </div>
+            </div>
+            
+            <!-- Chemical Composition Section -->
+            <h2>Chemical Composition</h2>
+            <div class="form-section">
+                <div class="form-group">
+                    <label for="c">C</label>
+                    <input type="number" id="c" step="0.01">
+                </div>
+                
+                <div class="form-group">
+                    <label for="si">Si</label>
+                    <input type="number" id="si" step="0.01">
+                </div>
+                
+                <div class="form-group">
+                    <label for="mn">Mn</label>
+                    <input type="number" id="mn" step="0.01">
+                </div>
+                
+                <div class="form-group">
+                    <label for="p">P</label>
+                    <input type="number" id="p" step="0.01">
+                </div>
+                
+                <div class="form-group">
+                    <label for="s">S</label>
+                    <input type="number" id="s" step="0.01">
+                </div>
+                
+                <div class="form-group">
+                    <label for="cr">Cr</label>
+                    <input type="number" id="cr" step="0.01">
+                </div>
+                
+                <div class="form-group">
+                    <label for="ni">Ni</label>
+                    <input type="number" id="ni" step="0.01">
+                </div>
+                
+                <div class="form-group">
+                    <label for="al">Al</label>
+                    <input type="number" id="al" step="0.01">
+                </div>
+                
+                <div class="form-group">
+                    <label for="cu">Cu</label>
+                    <input type="number" id="cu" step="0.01">
+                </div>
+                
+                <div class="form-group">
+                    <label for="sn">Sn</label>
+                    <input type="number" id="sn" step="0.01">
+                </div>
+                
+                <div class="form-group">
+                    <label for="mo">Mo</label>
+                    <input type="number" id="mo" step="0.01">
+                </div>
+            </div>
+            
+            <!-- Materials Section -->
+            <h2>Materials</h2>
+            <div class="form-section">
+                <div class="form-group">
+                    <label for="cac2_s">CaC2/S</label>
+                    <input type="number" id="cac2_s" step="0.01">
+                </div>
+                
+                <div class="form-group">
+                    <label for="fesi_sh">FeSi-Sh</label>
+                    <input type="number" id="fesi_sh" step="0.01">
+                </div>
+                
+                <div class="form-group">
+                    <label for="femn_sic">FeMn-SiC</label>
+                    <input type="number" id="femn_sic" step="0.01">
+                </div>
+                
+                <div class="form-group">
+                    <label for="cu_fecr">Cu-FeCr</label>
+                    <input type="number" id="cu_fecr" step="0.01">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="carbon_steel">Carbon Steel</label>
+                <input type="text" id="carbon_steel">
+            </div>
+            
+            <button type="submit">Submit Data</button>
+            
+            <div id="responseMessage" class="response-message"></div>
+        </form>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

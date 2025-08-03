@@ -74,3 +74,31 @@ CREATE TABLE recently_used_products (
     last_used TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (user_id, product_code)
 );
+
+-- Time study process table
+CREATE TABLE time_study_process (
+    id SERIAL PRIMARY KEY,
+    timestamp TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    shift VARCHAR(10),
+    part_name VARCHAR(100) NOT NULL,
+    heat_code VARCHAR(50) NOT NULL,
+    grade VARCHAR(50) NOT NULL,
+    c FLOAT,
+    si FLOAT,
+    mn FLOAT,
+    p FLOAT,
+    s FLOAT,
+    cr FLOAT,
+    ni FLOAT,
+    al FLOAT,
+    cu FLOAT,
+    sn FLOAT,
+    mo FLOAT,
+    cac2_s FLOAT,
+    fesi_sh FLOAT,
+    femn_sic FLOAT,
+    cu_fecr FLOAT,
+    carbon_steel VARCHAR(50),
+    micro_structure VARCHAR(100) DEFAULT 'Melting/Pouring Control',
+    macro_structure VARCHAR(100) DEFAULT 'In-Process Documents'
+);
