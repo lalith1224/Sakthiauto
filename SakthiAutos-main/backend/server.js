@@ -19,11 +19,13 @@ app.use((req, res, next) => {
 // ✅ Load routes
 const QF07Router = require('./QF07_FBQ_02');
 const QF07FBQ03Router = require('./QF07_FBQ_03');
-const timeStudyRouter = require('./timeStudyRoutes'); // Add time study routes
+const timeStudyRouter = require('./timeStudyRoutes');
+const qcRegisterRouter = require('./qcRegisterRoutes'); // Add QC Register routes
 
 app.use('/', QF07Router);
 app.use('/', QF07FBQ03Router);
-app.use('/', timeStudyRouter); // Register time study routes
+app.use('/', timeStudyRouter);
+app.use('/', qcRegisterRouter); // Register QC Register routes
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

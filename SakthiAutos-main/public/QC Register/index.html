@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QC Register</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f2f5;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            padding: 30px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        h2 {
+            color: #2980b9;
+            border-bottom: 1px solid #ecf0f1;
+            padding-bottom: 10px;
+            margin-top: 25px;
+        }
+        
+        .form-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .required label::after {
+            content: " *";
+            color: #e74c3c;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            border-color: #3498db;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+        }
+        
+        button {
+            background: linear-gradient(135deg, #3498db, #1a5276);
+            color: white;
+            border: none;
+            padding: 14px 25px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 600;
+            width: 100%;
+            margin-top: 20px;
+            transition: transform 0.3s, background 0.3s;
+        }
+        
+        button:hover {
+            background: linear-gradient(135deg, #2980b9, #154360);
+            transform: translateY(-2px);
+        }
+        
+        .response {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 6px;
+            text-align: center;
+            display: none;
+            font-weight: 600;
+        }
+        
+        .success {
+            background-color: #d4efdf;
+            color: #145a32;
+            border: 1px solid #a9dfbf;
+        }
+        
+        .error {
+            background-color: #fadbd8;
+            color: #922b21;
+            border: 1px solid #f5b7b1;
+        }
+        
+        .nav-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #7f8c8d;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        
+        .nav-button:hover {
+            background: #666;
+        }
+        
+        .sub-section {
+            background: #f8f9f9;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        @media (max-width: 768px) {
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-section {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="nav-button">← Back to Main Menu</a>
+        <h1>Quality Control Register</h1>
+        
+        <form id="qcRegisterForm">
+            <!-- Basic Information Section -->
+            <div class="sub-section">
+                <h2>Basic Information</h2>
+                <div class="form-section">
+                    <div class="form-group required">
+                        <label for="record_date">Record Date</label>
+                        <input type="date" id="record_date" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="disa_line">DISA Line</label>
+                        <select id="disa_line">
+                            <option value="">Select DISA Line</option>
+                            <option value="Line 1">Line 1</option>
+                            <option value="Line 2">Line 2</option>
+                            <option value="Line 3">Line 3</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group required">
+                        <label for="part_name">Part Name</label>
+                        <input type="text" id="part_name" required>
+                    </div>
+                    
+                    <div class="form-group required">
+                        <label for="heat_code">Heat Code</label>
+                        <input type="text" id="heat_code" required>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Additional Information -->
+            <div class="sub-section">
+                <div class="form-section">
+                    <div class="form-group">
+                        <label for="qty_moulds">Quantity of Moulds</label>
+                        <input type="number" id="qty_moulds" min="0">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="remarks">Remarks</label>
+                        <textarea id="remarks" rows="3"></textarea>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Metal Composition 1 -->
+            <div class="sub-section">
+                <h2>Metal Composition 1 (%)</h2>
+                <div class="form-section two-column">
+                    <div class="form-group">
+                        <label for="c1">C</label>
+                        <input type="number" id="c1" step="0.001">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="si1">Si</label>
+                        <input type="number" id="si1" step="0.001">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="mn1">Mn</label>
+                        <input type="number" id="mn1" step="0.001">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="p1">P</label>
+                        <input type="number" id="p1" step="0.001">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="s1">S</label>
+                        <input type="number" id="s1" step="0.001">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="mg1">Mg</label>
+                        <input type="number" id="mg1" step="0.001">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="f_l1">F/L</label>
+                        <input type="number" id="f_l1" step="0.001">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="cu1">Cu</label>
+                        <input type="number" id="cu1" step="0.001">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="cr1">Cr</label>
+                        <input type="number" id="cr1" step="0.001">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Metal Composition 2 -->
+            <div class="sub-section">
+                <h2>Metal Composition 2 (%)</h2>
+                <div class="form-section two-column">
+                    <div class="form-group">
+                        <label for="c2">C</label>
+                        <input type="number" id="c2" step="0.001">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="si2">Si</label>
+                        <input type="number" id="si2" step="0.001">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="mn2">Mn</label>
+                        <input type="number" id="mn2" step="0.001">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="s2">S</label>
+                        <input type="number" id="s2" step="0.001">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="cr2">Cr</label>
+                        <input type="number" id="cr2" step="0.001">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="cu2">Cu</label>
+                        <input type="number" id="cu2" step="0.001">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="sn2">Sn</label>
+                        <input type="number" id="sn2" step="0.001">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Pouring Parameters -->
+            <div class="sub-section">
+                <h2>Pouring Parameters</h2>
+                <div class="form-section">
+                    <div class="form-group">
+                        <label for="pouring_time">Pouring Time</label>
+                        <input type="time" id="pouring_time">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="pouring_temp">Pouring Temperature (°C)</label>
+                        <input type="number" id="pouring_temp" step="0.1">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="pp_code">PP Code</label>
+                        <input type="text" id="pp_code">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="fc_no_heat_no">FC No/Heat No</label>
+                        <input type="text" id="fc_no_heat_no">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Magnesium Treatment -->
+            <div class="sub-section">
+                <h2>Magnesium Treatment</h2>
+                <div class="form-section">
+                    <div class="form-group">
+                        <label for="mg_kgs">Mg Kgs</label>
+                        <input type="number" id="mg_kgs" step="0.001">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="res_mg">Residual Mg (%)</label>
+                        <input type="number" id="res_mg" step="0.001">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="converter_percent">Converter Percent (%)</label>
+                        <input type="number" id="converter_percent" step="0.001">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="rec_mg_percent">Recovered Mg (%)</label>
+                        <input type="number" id="rec_mg_percent" step="0.001">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="stream_innoculat">Stream Inoculant</label>
+                        <input type="number" id="stream_innoculat" step="0.001">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="p_time_sec">Pouring Time (sec)</label>
+                        <input type="number" id="p_time_sec" step="0.1">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tapping Information -->
+            <div class="sub-section">
+                <h2>Tapping Information</h2>
+                <div class="form-section">
+                    <div class="form-group">
+                        <label for="treatment_no">Treatment No</label>
+                        <input type="text" id="treatment_no">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="con_no">Converter No</label>
+                        <input type="text" id="con_no">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="tapping_time">Tapping Time</label>
+                        <input type="time" id="tapping_time">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="corrective_addition_kgs">Corrective Addition (kgs)</label>
+                        <input type="number" id="corrective_addition_kgs" step="0.001">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="tapping_wt_kgs">Tapping Weight (kgs)</label>
+                        <input type="number" id="tapping_wt_kgs" step="0.001">
+                    </div>
+                </div>
+            </div>
+            
+            <button type="submit" id="submitBtn">Submit QC Register Data</button>
+            
+            <div id="responseMessage" class="response"></div>
+        </form>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
